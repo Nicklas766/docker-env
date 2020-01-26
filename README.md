@@ -16,6 +16,9 @@ Use this if you want to use:
 docker-compose up -d
 ```
 
+Open: http://localhost
+Open: http://backend.localhost
+
 ### Production
 Edit the `docker-compose.prod.yml` and `docker/prod/*` as you see fit for production.
 ```

@@ -17,6 +17,7 @@ docker-compose up -d
 ```
 
 Open: http://localhost
+
 Open: http://backend.localhost
 
 ### Production

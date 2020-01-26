@@ -23,7 +23,7 @@ services:
 
   frontend-prod:
     build: 
-      context: ./frontend
+      context: ./frontend/
       dockerfile: ../docker/prod/frontend/Dockerfile
     environment:
       VIRTUAL_HOST: localhost

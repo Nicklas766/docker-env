@@ -8,13 +8,15 @@ volumes:
 ```
 
 ## Development
-The `docker-compose.yml` will create volumes containing the `node_modules`, so you only have to do the following:
+Note that it'll take quite a while the first time, due to having to build images.
+
+* The `docker-compose.yml` will create volumes containing the `node_modules`.
+* A volume named `mongodata` will be created/used for persisting mongodb data.
 ```
 docker-compose up -d
 ```
 
 ## Production
-
 ```
 docker-compose -f docker-compose.prod.yml up -d
 ```

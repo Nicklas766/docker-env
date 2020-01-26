@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import API from '../utils/API'
+import API from '../utils/API';
 import './App.css';
 
 const App = () => {
@@ -10,7 +10,7 @@ const App = () => {
     API.getData('/fetch')
       .then((res) => setCoffeeProducts(res.data))
       .catch((err) => console.log(err));
-  }
+  };
 
   const createCoffee = (event) => {
     event.preventDefault();
@@ -21,19 +21,21 @@ const App = () => {
         setNameText('');
       })
       .catch((err) => console.log(err));
-  }
+  };
 
   useEffect(() => fetchCoffees(), []);
 
   return (
     <div className="App">
-      <h1>Coffee inventory ☕️</h1>
+      <h1>Coffee inventory</h1>
 
       <h2>All coffee products:</h2>
       <ul>
-        {coffeeProducts.map((coffee, index) => <li key={index}>
-          {coffee.name}
-        </li>)}
+        {coffeeProducts.map((coffee) => (
+          <li key={coffee}>
+            {coffee.name}
+          </li>
+        ))}
       </ul>
 
       <form onSubmit={(event) => createCoffee(event)}>
@@ -42,6 +44,6 @@ const App = () => {
       </form>
     </div>
   );
-}
+};
 
 export default App;

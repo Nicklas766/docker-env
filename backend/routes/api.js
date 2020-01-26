@@ -7,8 +7,8 @@ const jsonParser = bodyParser.json();
 
 // setup mongoose
 mongoose.connect('mongodb://mongodb:27017', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
 mongoose.connection.on('error', (error) => console.log(error));
@@ -19,18 +19,17 @@ const Coffee = mongoose.model('Coffee', coffeeSchema);
 
 // routes
 router.post('/create', jsonParser, (req, res) => {
-    const coffee = new Coffee({ name: req.body.name });
+  const coffee = new Coffee({ name: req.body.name });
 
-    coffee.save()
-        .then(() => res.send('Success!'))
-        .catch(() => res.sendStatus(500))
+  coffee.save()
+    .then(() => res.send('Success!'))
+    .catch(() => res.sendStatus(500));
 });
 
 router.get('/fetch', (req, res) => {
-    Coffee.find()
-        .then(allCoffees => res.json(allCoffees))
-        .catch(err => res.sendStatus(500))
+  Coffee.find()
+    .then((allCoffees) => res.json(allCoffees))
+    .catch(() => res.sendStatus(500));
 });
-
 
 export default router;

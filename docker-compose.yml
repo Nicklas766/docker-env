@@ -1,0 +1,46 @@
+version: '3.7'
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    depends_on:
+        - backend
+        - frontend
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  backend:
+    build: 
+      context: ./backend/
+      dockerfile: ../docker/dev/backend/Dockerfile
+    volumes:
+      - "./backend:/app"
+      - "/app/node_modules"
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+      VIRTUAL_HOST: backend.localhost
+    expose:
+      - 3000
+
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: ../docker/dev/frontend/Dockerfile
+    volumes:
+      - "./frontend:/app"
+      - "/app/node_modules"
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+      VIRTUAL_HOST: localhost
+    expose:
+      - 3000
+
+  mongodb:
+    image: mongo
+    volumes:
+      - "/mongodata:/data/db"
+    ports:
+      - "27017:27017"

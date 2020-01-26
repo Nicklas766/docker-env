@@ -1,31 +1,23 @@
-Note: lots of problems with MongoDB with Windows.
+This project uses:
+* React
+* Express
+* MongoDB (with mongoose)
+
+## Running the app
+* ⚠️ Backend uses a subdomain, `backend.localhost`. It works fine in Chrome but might require changing settings in firefox and ie. [Read this if you use firefox](https://stackoverflow.com/questions/33251155/firefox-cannot-connect-to-a-local-servers-subdomain/56049681).
 
 
-If you want to change the volume for the mongodb data:
-```
-volumes:
-      - "/mongodata:/data/db"
-```
-
-## Development
-Note that it'll take quite a while the first time, due to having to build images.
-
-* The `docker-compose.yml` will create volumes containing the `node_modules`.
-* A volume named `mongodata` will be created/used for persisting mongodb data.
+### Development
+Use this if you want to use:
+* the backend and frontend as volumes.
+* nodemon for the backend.
+* hot reloading for the frontend.
 ```
 docker-compose up -d
 ```
 
-## Production
+### Production
+Edit the `docker-compose.prod.yml` and `docker/prod/*` as you see fit for production.
 ```
 docker-compose -f docker-compose.prod.yml up -d
 ```
-
-## Note
-The backend uses a subdomain like `backend.localhost`, works fine in chrome but might require changing settings in firefox and ie.
-
-[Read this if you use firefox](https://stackoverflow.com/questions/33251155/firefox-cannot-connect-to-a-local-servers-subdomain/56049681)
-
-
-
-https://stackoverflow.com/questions/30043872/docker-compose-node-modules-not-present-in-a-volume-after-npm-install-succeeds

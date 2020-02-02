@@ -12,6 +12,17 @@ Use this if you want to use:
 * the backend and frontend as volumes.
 * nodemon for the backend.
 * hot reloading for the frontend.
+
+`.env`
+```
+HOST=localhost
+MODE=dev
+FRONTEND_BIND_MOUNT=./frontend/:/app
+BACKEND_BIND_MOUNT=./backend/:/app
+CACHED_NODE_MODULES=/app/node_modules
+HOTRELOAD=true
+```
+
 ```
 docker-compose up -d
 ```
@@ -21,7 +32,15 @@ Open: http://localhost
 Open: http://backend.localhost
 
 ### Production
-Edit the `docker-compose.prod.yml` and `docker/prod/*` as you see fit for production.
+`.env`
+```
+HOST=localhost
+MODE=prod
+FRONTEND_BIND_MOUNT=
+BACKEND_BIND_MOUNT=
+CACHED_NODE_MODULES=
+HOTRELOAD=false
+```
 ```
 docker-compose -f docker-compose.prod.yml up -d
 ```

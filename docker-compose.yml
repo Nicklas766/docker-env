@@ -12,31 +12,31 @@ services:
   backend:
     build: 
       context: ./backend/
-      dockerfile: ../docker/dev/backend/Dockerfile
+      dockerfile: "Dockerfile-${MODE}"
     volumes:
-      - "./backend:/app"
-      - "/app/node_modules"
+      - "${BACKEND_BIND_MOUNT}"
+      - "${CACHED_NODE_MODULES}"
     depends_on:
         - mongodb
         - nginx-proxy
     environment:
-      CHOKIDAR_USEPOLLING: "true"
-      VIRTUAL_HOST: backend.localhost
+      VIRTUAL_HOST: "backend.${HOST}"
+      CHOKIDAR_USEPOLLING: "${HOTRELOAD}"
     expose:
       - 3000
 
   frontend:
     build: 
       context: ./frontend/
-      dockerfile: ../docker/dev/frontend/Dockerfile
+      dockerfile: "Dockerfile-${MODE}"
     volumes:
-      - "./frontend:/app"
-      - "/app/node_modules"
+      - "${FRONTEND_BIND_MOUNT}"
+      - "${CACHED_NODE_MODULES}"
     depends_on:
       - nginx-proxy
     environment:
-      CHOKIDAR_USEPOLLING: "true"
-      VIRTUAL_HOST: localhost
+      VIRTUAL_HOST: ${HOST}
+      CHOKIDAR_USEPOLLING: "${HOTRELOAD}"
     expose:
       - 3000
 

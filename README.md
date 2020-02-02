@@ -13,7 +13,7 @@ Use this if you want to use:
 * nodemon for the backend.
 * hot reloading for the frontend.
 
-`.env`
+Create `.env`:
 ```
 HOST=localhost
 MODE=dev
@@ -22,8 +22,9 @@ BACKEND_BIND_MOUNT=./backend/:/app
 CACHED_NODE_MODULES=/app/node_modules
 HOTRELOAD=true
 ```
-
+Then:
 ```
+docker-compose build
 docker-compose up -d
 ```
 
@@ -32,7 +33,7 @@ Open: http://localhost
 Open: http://backend.localhost
 
 ### Production
-`.env`
+Create `.env`:
 ```
 HOST=localhost
 MODE=prod
@@ -41,6 +42,8 @@ BACKEND_BIND_MOUNT=
 CACHED_NODE_MODULES=
 HOTRELOAD=false
 ```
+Then:
 ```
+docker-compose build
 docker-compose up -d
 ```

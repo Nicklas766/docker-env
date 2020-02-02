@@ -8,10 +8,7 @@ This project uses:
 
 
 ### Development
-Use this if you want to use:
-* the backend and frontend as volumes.
-* nodemon for the backend.
-* hot reloading for the frontend.
+For the development environment we use the backend and frontend as bind mounts, nodemon for the backend, and hot reloading for the frontend.
 
 Create `.env`:
 ```
@@ -33,6 +30,8 @@ Open: http://localhost
 Open: http://backend.localhost
 
 ### Production
+⚠️ The variables that are empty, **must be empty or undefined**, else Docker will think it couldn't find them. ⚠️ 
+
 Create `.env`:
 ```
 HOST=localhost

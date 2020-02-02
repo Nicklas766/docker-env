@@ -10,7 +10,7 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
 
   backend:
-    build: 
+    build:
       context: ./backend/
       dockerfile: "Dockerfile-${MODE}"
     volumes:
@@ -26,7 +26,7 @@ services:
       - 3000
 
   frontend:
-    build: 
+    build:
       context: ./frontend/
       dockerfile: "Dockerfile-${MODE}"
     volumes:
@@ -34,6 +34,7 @@ services:
       - "${CACHED_NODE_MODULES}"
     depends_on:
       - nginx-proxy
+      - backend
     environment:
       VIRTUAL_HOST: ${HOST}
       CHOKIDAR_USEPOLLING: "${HOTRELOAD}"

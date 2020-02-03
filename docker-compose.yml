@@ -10,35 +10,34 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
 
   backend:
-    build: 
-      context: ./backend/
-      dockerfile: "Dockerfile-${MODE}"
+    build: ./backend/
     volumes:
-      - "${BACKEND_BIND_MOUNT}"
-      - "${CACHED_NODE_MODULES}"
-    depends_on:
-        - mongodb
-        - nginx-proxy
+      - "./backend/:/app"
+      - "/app/node_modules"
     environment:
       VIRTUAL_HOST: "backend.${HOST}"
-      CHOKIDAR_USEPOLLING: "${HOTRELOAD}"
+      CHOKIDAR_USEPOLLING: "true"
+    depends_on:
+      - mongodb
+      - nginx-proxy
     expose:
       - 3000
-
+    command: "npm run ${MODE}"
+  
   frontend:
-    build: 
-      context: ./frontend/
-      dockerfile: "Dockerfile-${MODE}"
+    build: ./frontend/
     volumes:
-      - "${FRONTEND_BIND_MOUNT}"
-      - "${CACHED_NODE_MODULES}"
-    depends_on:
-      - nginx-proxy
+      - "./frontend/:/app"
+      - "/app/node_modules"
     environment:
       VIRTUAL_HOST: ${HOST}
-      CHOKIDAR_USEPOLLING: "${HOTRELOAD}"
+      CHOKIDAR_USEPOLLING: "true"
+    depends_on:
+      - nginx-proxy
+      - backend
     expose:
       - 3000
+    command: "npm run ${MODE}"
 
   mongodb:
     image: mongo
@@ -49,3 +48,4 @@ services:
 
 volumes:
   mongodata:
+    

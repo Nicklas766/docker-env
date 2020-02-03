@@ -8,20 +8,16 @@ This project uses:
 
 
 ### Development
-For the development environment we use the backend and frontend as bind mounts, nodemon for the backend, and hot reloading for the frontend.
+Dev mode uses nodemon for the backend and hot reloading for the frontend.
 
 Create `.env`:
 ```
 HOST=localhost
 MODE=dev
-FRONTEND_BIND_MOUNT=./frontend/:/app
-BACKEND_BIND_MOUNT=./backend/:/app
-CACHED_NODE_MODULES=/app/node_modules
-HOTRELOAD=true
 ```
+
 Then:
 ```
-docker-compose build
 docker-compose up -d
 ```
 
@@ -30,19 +26,13 @@ Open: http://localhost
 Open: http://backend.localhost
 
 ### Production
-⚠️ The variables that are empty, **must be empty or undefined**, else Docker will think it couldn't find them. ⚠️ 
-
 Create `.env`:
 ```
-HOST=localhost
+HOST=example.com
 MODE=prod
-FRONTEND_BIND_MOUNT=
-BACKEND_BIND_MOUNT=
-CACHED_NODE_MODULES=
-HOTRELOAD=false
 ```
+
 Then:
 ```
-docker-compose build
 docker-compose up -d
 ```
